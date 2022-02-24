@@ -1,0 +1,46 @@
+// The URL of your opensheet
+const endpoint = "https://opensheet.elk.sh/<<Google Sheets ID>>/<<Sheet Tab>>"
+
+// Function that performs the request to the API
+async function loadItems() {
+    let at = endpoint
+    let req = new Request(at)
+    let corpo = await req.loadJSON()
+    return corpo
+}
+// Request the Data
+let json = await loadItems()
+
+//Obtain location of Data
+collectionValue = json[0].Column_A
+trackedItemValue = json[1].Column_A
+trackedItemName = json[2].Column_A
+
+// Create the widget
+let w = new ListWidget()
+w.backgroundColor = new Color("#000080")
+
+// Add the value of the collection to the widget
+
+c = w.addText("Collection Value")
+c.textColor = Color.white()
+c.font + new Font("Avenir-Heavy" ,20)
+t = w.addText(collectionValue)
+t.textColor = Color.white()
+t.font = new Font("Avenir-Heavy",20)
+
+// Add tracked item to the widget
+
+// Tracked item name
+
+n = w.addText(trackedItemName)
+n.textColor = Color.white()
+n.font = new Font("Avenir-Heavy" ,20)
+
+// Tracked item value
+v = w.addText(trackedItemValue)
+v.textColor = Color.white()
+v.font = new Font("Avenir-Heavy" ,20)
+
+Script.setWidget(w)
+Script.complete()
