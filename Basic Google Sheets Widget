@@ -1,0 +1,31 @@
+// The URL of your opensheet
+const endpoint = "https://opensheet.elk.sh/<<Google Sheets ID>>/<<Sheet Tab>>"
+
+// Function that performs the request to the API
+async function loadItems() {
+    let at = endpoint
+    let req = new Request(at)
+    let corpo = await req.loadJSON()
+    return corpo
+}
+// Request the Data
+let json = await loadItems()
+
+//Obtain location of Data
+ValueOne = json[0].Column_A
+
+// Create the widget
+let w = new ListWidget()
+w.backgroundColor = new Color("#000080")
+
+// Add the value to Widget
+
+c = w.addText("Value")
+c.textColor = Color.white()
+c.font + new Font("Avenir-Heavy" ,20)
+t = w.addText(ValueOne)
+t.textColor = Color.white()
+t.font = new Font("Avenir-Heavy",20)
+
+Script.setWidget(w)
+Script.complete()
